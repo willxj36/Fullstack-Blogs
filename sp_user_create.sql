@@ -14,3 +14,7 @@ GRANT ALL ON blogs.* TO 'blogapp'@'localhost';
 
 ALTER USER 'blogapp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password123';
     
+SELECT * FROM tags;
+SELECT * FROM authors;
+SELECT * FROM blogs;
+SELECT * FROM blogtags;

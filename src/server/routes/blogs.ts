@@ -6,8 +6,13 @@ const router = express.Router();
 router.get('/:id?', async (req, res) => {
     try {
         let id = Number(req.params.id);
-        let blog = id ? db.Blogs.one(id) : db.Blogs.all();
-        res.send(blog);
+        if(id) {
+            let blog = db.Blogs.one(id);
+            res.send(blog);
+        } else {
+            let blogs = db.Blogs.all();
+            res.send(blogs);
+        }
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
@@ -16,8 +21,8 @@ router.get('/:id?', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        let {title, content, author} = req.body;
-        db.Blogs.post(title, content, author);
+        let {title, content, author, tags} = req.body;
+        db.Blogs.post(title, content, author, tags);
         res.send('Blog posted successfully!');
     } catch(e) {
         console.log(e);
@@ -27,9 +32,9 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        let {title, content, author} = req.body;
+        let {title, content, tags} = req.body;
         let id = Number(req.params.id);
-        db.Blogs.put(title, content, author, id);
+        db.Blogs.put(title, content, tags, id);
         res.send('Blog updated successfully!');
     } catch(e) {
         console.log(e);
@@ -41,6 +46,7 @@ router.delete('/:id', async (req, res) => {
     try {
         let id = Number(req.params.id);
         db.Blogs.deleter(id);
+        res.send('Blog deleted successfully!')
     } catch(e) {
         console.log(e);
         res.sendStatus(500);

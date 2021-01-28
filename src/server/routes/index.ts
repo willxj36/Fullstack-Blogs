@@ -2,7 +2,7 @@ import * as express from 'express';
 import blogRouter from './blogs';
 import authorRouter from './authors';
 import tagRouter from './tags';
-import blogTagRouter from './routes/blogtags';
+import blogTagRouter from './blogtags';
 
 const router = express.Router();
 
