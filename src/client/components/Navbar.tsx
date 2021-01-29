@@ -5,7 +5,9 @@ const Navbar = () => {
 
     return(
         <div className="d-flex navbar bg-success">
-            <Link to='/' className="btn btn-lg btn-dark-outline">Home</Link>
+            <h3>Bloggy Blogger Blogs</h3>
+            <Link to='/' className="btn btn-lg btn-dark-outline ml-auto">Home</Link>
+            <Link to='/newblog' className="btn btn-lg btn-dark-outline">New Blog</Link>
         </div>
     )
 

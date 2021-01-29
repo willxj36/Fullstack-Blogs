@@ -17,4 +17,9 @@ ALTER USER 'blogapp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'passw
 SELECT * FROM tags;
 SELECT * FROM authors;
 SELECT * FROM blogs;
+
+DELETE FROM blogs WHERE id > 0;
+DELETE FROM blogtags WHERE blogid > 0;
 SELECT * FROM blogtags;
+
+SELECT b.title, b.content, a.name, t.name FROM blogs b JOIN authors a ON a.id = b.authorid JOIN blogtags bt ON bt.blogid = b.id JOIN tags t ON t.id = bt.tagid;

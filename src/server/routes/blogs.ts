@@ -7,10 +7,10 @@ router.get('/:id?', async (req, res) => {
     try {
         let id = Number(req.params.id);
         if(id) {
-            let blog = db.Blogs.one(id);
+            let blog = await db.Blogs.one(id);
             res.send(blog);
         } else {
-            let blogs = db.Blogs.all();
+            let blogs = await db.Blogs.all();
             res.send(blogs);
         }
     } catch(e) {
