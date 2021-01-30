@@ -3,10 +3,10 @@ import db from '../db';
 
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         let blogId = Number(req.params.id);
-        let blogTags = db.BlogTags.get(blogId);
+        let blogTags = await db.BlogTags.get(blogId);
         res.send(blogTags);
     } catch(e) {
         console.log(e);

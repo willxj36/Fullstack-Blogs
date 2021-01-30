@@ -3,9 +3,9 @@ import db from '../db';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        let authors = db.Authors.get();
+        let authors = await db.Authors.get();
         res.send(authors);
     } catch(e) {
         console.log(e);

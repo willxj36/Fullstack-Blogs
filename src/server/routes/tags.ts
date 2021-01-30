@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        let tags = db.Tags.get();
+        let tags = await db.Tags.get();
         res.send(tags);
     } catch(e) {
         console.log(e);

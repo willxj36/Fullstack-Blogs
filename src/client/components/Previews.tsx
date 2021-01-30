@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import $ from 'jquery';
 import * as dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import apiService from '../../utils/apiService';
+import { Blog } from '../../utils/models'
 
 const url = 'http://localhost:3000/api/blogs'
 
 const Previews = () => {
 
-    const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState<Array<Blog>>([]);
     const [blogDisplay, setBlogDisplay] = useState([]);
 
     useEffect(() => {

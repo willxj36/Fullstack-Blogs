@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import apiService from '../../utils/apiService';
 import * as dayjs from 'dayjs';
+import { Blog } from '../../utils/models'
 
 
 const FullBlog = () => {
@@ -13,9 +14,12 @@ const FullBlog = () => {
         title: null,
         content: null,
         author: null,
-        _created: null
+        _created: null,
+        _updated: null,
+        tag: null
     });
     const [date, setDate] = useState<any>();
+    const [update, setUpdate] = useState<any>();
 
     useEffect(() => {
         (async() => {
@@ -28,28 +32,42 @@ const FullBlog = () => {
     useEffect(() => {
         let date = dayjs(`${blog._created}`).format('MMM DD, YYYY');
         setDate(date);
+        if (blog._updated) {
+            let update = dayjs(`${blog._updated}`).format('MMM DD, YYYY');
+            setUpdate(update);
+        }
     }, [blog]);
 
-    return (
-        <div className="container p-5 col-12">
-            <div className="row">
-                <img src="/space-stock.jpg" alt="Header image" className="col-5 mb-5 display-inline img-responsive"/>
-                <Link to={`/blogs/${id}/edit`} className="display-inline btn btn-secondary align-self-start ml-auto">Edit Blog</Link>
+    if (update) {
+        return (
+            <div className="container p-5 col-12">
+                <div className="row">
+                    <img src="/space-stock.jpg" alt="Header image" className="col-5 mb-5 display-inline img-responsive"/>
+                    <Link to={`/blogs/${id}/edit`} className="display-inline btn btn-secondary align-self-start ml-auto">Edit Blog</Link>
+                </div>
+                <h1>{blog.title}</h1>
+                <p><span className="badge badge-warning">{blog.tag}</span></p>
+                <h4 className="font-italic my-3">By {blog.author}</h4>
+                <h4 className="text-muted my-3">{date}</h4>
+                <p className="my-2 text-muted">Edited on {update}</p>
+                <p className="mt-3">{blog.content}</p>
             </div>
-            <h1>{blog.title}</h1>
-            <h4 className="font-italic my-3">By {blog.author}</h4>
-            <h4 className="text-muted my-3">{date}</h4>
-            <p className="mt-3">{blog.content}</p>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <div className="container p-5 col-12">
+                <div className="row">
+                    <img src="/space-stock.jpg" alt="Header image" className="col-5 mb-5 display-inline img-responsive"/>
+                    <Link to={`/blogs/${id}/edit`} className="display-inline btn btn-secondary align-self-start ml-auto">Edit Blog</Link>
+                </div>
+                <h1>{blog.title}</h1>
+                <p><span className="badge badge-warning">{blog.tag}</span></p>
+                <h4 className="font-italic my-3">By {blog.author}</h4>
+                <h4 className="text-muted my-3">{date}</h4>
+                <p className="mt-3">{blog.content}</p>
+            </div>
+        )
+    }
 }
 
 export default FullBlog;
-
-interface Blog {
-    id?: number,
-    title: string,
-    content: string,
-    author: string,
-    _created?: string
-}

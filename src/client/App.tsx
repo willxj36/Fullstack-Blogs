@@ -14,9 +14,9 @@ const App = () => {
 			<Navbar />
 			<Switch>
 				<Route exact path='/' component={Previews} />
-				{/* <Route path='/newblog' component={NewBlog} /> */}
+				<Route path='/newblog' component={NewBlog} />
 				<Route exact path='/blogs/:id' component={FullBlog} />
-				{/* <Route path='/blogs/:id/edit' component={EditBlog} /> */}
+				<Route path='/blogs/:id/edit' component={EditBlog} />
 			</Switch>
 		</BrowserRouter>
 	);

@@ -22,8 +22,8 @@ router.get('/:id?', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let {title, content, author, tags} = req.body;
-        db.Blogs.post(title, content, author, tags);
-        res.send('Blog posted successfully!');
+        let response = await db.Blogs.post(title, content, author, tags);
+        res.send(response);
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
